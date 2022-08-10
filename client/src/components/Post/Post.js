@@ -1,23 +1,36 @@
+import { Link } from 'react-router-dom'
 import './Post.css'
 
-const Post = () => {
+const Post = ({post}) => {
   return (
     <div className='post'>
-          <img className='postImg' src="https://images.pexels.com/photos/273239/pexels-photo-273239.jpeg" alt="" srcset="" />
+     {
+          post.photo && (
+               <img className='postImg' src="https://images.pexels.com/photos/273239/pexels-photo-273239.jpeg" alt="" srcset="" />
+          )
+     }
+          
           <div className="postInfo">
                <div className="postCats">
-                    <span className="postCat">Music</span>
-                    <span className="postCat">Life</span>
+                    {
+                         post.categories.map(c => (
+                              <Link className='link' key={c} to={`/?cat=${c}`}>
+                                   <span className="postCat">{c}</span>
+                              </Link>
+                         ))
+                    }
                </div>
+               <Link className="link" to={`/post/${post._id}`}>
                <span className="postTitle">
-                    Lorem, ipsum dolor sit amet;
+                   {post.title}
                </span>
+               </Link>
                <hr />
                <span className="postDate">
-                    1 hour ago
+                   {new Date(post.createdAt).toDateString()}
                </span>
           </div>
-          <p className='postDesc'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, vero esse qui provident aliquam tenetur sequi adipisci distinctio natus sit perspiciatis, ratione a, pariatur quasi ducimus voluptas eum et dolor? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae incidunt id ducimus repellat laboriosam cupiditate! Quis voluptas cum enim et sed est fugiat ab necessitatibus iure, praesentium ex provident, magni ullam animi exercitationem repellat perferendis dolor rerum accusantium veritatis! Voluptates.</p>
+          <p className='postDesc'>{post.desc}</p>
     </div>
   )
 }

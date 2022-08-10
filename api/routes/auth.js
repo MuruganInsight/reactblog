@@ -29,10 +29,16 @@ const bcrypt = require('bcrypt');
     router.post('/login', async (req, res) => {
         try{
             const user = await User.findOne({username: req.body.username})
-            !user && res.status(400).json("Wronng Credentials")
+            
+            if(!user){
+                return res.status(400).json("Wronng Credentials")
+            }
 
             const validated = await bcrypt.compare(req.body.password, user.password)
-            !validated && returnres.status(400).json("Wronng Credentials")
+            
+            if(!validated){
+                return res.status(400).json("Wronng Credentials")
+            }
 
 
             const { password, ...others } = user._doc;
