@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const dotenv = require('dotenv');
 const mongoose = require("mongoose");
+const path = require("path");
 const authRoute = require("./routes/auth")
 const userRoute = require('./routes/users')
 const postRoute = require('./routes/posts')
@@ -9,9 +10,11 @@ const categoryRoute = require('./routes/categories')
 
 const multer = require("multer");
 
-app.use(express.json())
 
 dotenv.config();
+app.use(express.json())
+app.use("/images", express.static(path.join(__dirname, "/images")))
+
 mongoose.connect(process.env.MONGO_URL)
     .then(console.log('Mongo DB Connected'))
     .catch(err => console.log(err))
@@ -39,9 +42,7 @@ app.use("/api/user", userRoute)
 app.use("/api/posts", postRoute)
 app.use("/api/categories", categoryRoute)
 
-app.use('/', (req,res) => {
-    console.log('This is root url')
-})
+
 
 app.listen('5000', () => {
     console.log("Backend is running");
