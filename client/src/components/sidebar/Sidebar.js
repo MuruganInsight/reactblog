@@ -21,7 +21,7 @@ function Sidebar() {
     <div className='sidebar'>
      <div className="sidebarItem">
           <span className="sidebarTitle">About Me</span>
-          <img src="https://images.pexels.com/photos/247676/pexels-photo-247676.jpeg" alt="About me" />
+          {/* <img src="https://images.pexels.com/photos/247676/pexels-photo-247676.jpeg" alt="About me" /> */}
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat dolor eveniet, dolorem dolore repudiandae necessitatibus expedita. Facilis vitae doloremque fuga.</p>
      </div>
      <div className="sidebarItem">
